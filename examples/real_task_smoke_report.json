@@ -1,0 +1,39 @@
+{
+  "task_type": "general",
+  "objective": "Generate a smoke test report for the current project.",
+  "context": {
+    "action_plan": [
+      {
+        "name": "shell.run",
+        "params": {
+          "command": "python -c \"import subprocess; from pathlib import Path; result = subprocess.run(['python','-m','pytest','-q'], capture_output=True, text=True); output = ((result.stdout or '') + (result.stderr or '')).strip(); report = '# Smoke Test Report\\n\\n'; report += 'Status: ' + ('PASS' if result.returncode == 0 else 'FAIL') + '\\n\\n'; report += '## Command\\n\\n`python -m pytest -q`\\n\\n'; report += '## Output\\n\\n```text\\n' + output + '\\n```\\n'; Path('reports').mkdir(exist_ok=True); Path('reports/smoke_report.md').write_text(report, encoding='utf-8'); raise SystemExit(result.returncode)\""
+        }
+      }
+    ],
+    "final_output": "smoke report generated"
+  },
+  "success_checks": [
+    {
+      "kind": "file_exists",
+      "target": "reports/smoke_report.md"
+    },
+    {
+      "kind": "file_contains",
+      "target": "reports/smoke_report.md",
+      "expected": "# Smoke Test Report"
+    },
+    {
+      "kind": "file_contains",
+      "target": "reports/smoke_report.md",
+      "expected": "Status: PASS"
+    }
+  ],
+  "permissions": {
+    "workspace_root": ".",
+    "enable_file": true,
+    "enable_shell": true,
+    "enable_http": false,
+    "allowed_shell_prefixes": ["python", "echo"],
+    "allowed_http_domains": []
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "task_type": "general",
+  "objective": "Run the project's regression tests as a smoke check.",
+  "context": {
+    "action_plan": [
+      {
+        "name": "shell.run",
+        "params": {
+          "command": "python -m pytest -q"
+        }
+      }
+    ],
+    "final_output": "project smoke test completed"
+  },
+  "success_checks": [
+    {
+      "kind": "no_error_events"
+    },
+    {
+      "kind": "final_output_contains",
+      "expected": "project smoke test completed"
+    }
+  ],
+  "permissions": {
+    "workspace_root": ".",
+    "enable_file": true,
+    "enable_shell": true,
+    "enable_http": false,
+    "allowed_shell_prefixes": ["python", "echo"],
+    "allowed_http_domains": []
+  }
+}

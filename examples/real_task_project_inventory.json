@@ -1,0 +1,34 @@
+{
+  "task_type": "general",
+  "objective": "Read README.md and pyproject.toml, then write reports/project_inventory.md with a concise inventory of the project.",
+  "context": {
+    "source_files": ["README.md", "pyproject.toml"],
+    "deliverable_path": "reports/project_inventory.md",
+    "instructions": [
+      "First inspect the listed source files before writing.",
+      "The report must contain the headings '# Project Inventory', '## Purpose', '## Dependencies', and '## Entrypoints'.",
+      "Summarize dependencies from pyproject.toml and mention the CLI/API entrypoints."
+    ]
+  },
+  "success_checks": [
+    {"kind": "file_exists", "target": "reports/project_inventory.md"},
+    {"kind": "file_contains", "target": "reports/project_inventory.md", "expected": "# Project Inventory"},
+    {"kind": "file_contains", "target": "reports/project_inventory.md", "expected": "## Dependencies"},
+    {"kind": "file_contains", "target": "reports/project_inventory.md", "expected": "## Entrypoints"}
+  ],
+  "budget": {
+    "max_steps": 6,
+    "max_shell_calls": 1,
+    "max_http_calls": 0,
+    "timeout_seconds": 30,
+    "max_errors": 3
+  },
+  "permissions": {
+    "workspace_root": ".",
+    "enable_file": true,
+    "enable_shell": false,
+    "enable_http": false,
+    "allowed_shell_prefixes": ["python", "echo"],
+    "allowed_http_domains": []
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "task_type": "general",
+  "objective": "Write a demo file into the workspace.",
+  "context": {
+    "action_plan": [
+      {
+        "name": "file.write",
+        "params": {
+          "path": "artifacts/demo.txt",
+          "content": "hello from agent loop"
+        }
+      }
+    ],
+    "final_output": "demo file created"
+  },
+  "success_checks": [
+    {
+      "kind": "file_exists",
+      "target": "artifacts/demo.txt"
+    },
+    {
+      "kind": "file_contains",
+      "target": "artifacts/demo.txt",
+      "expected": "hello from agent loop"
+    }
+  ],
+  "permissions": {
+    "workspace_root": ".",
+    "enable_file": true,
+    "enable_shell": true,
+    "enable_http": false,
+    "allowed_shell_prefixes": ["python", "echo"],
+    "allowed_http_domains": []
+  }
+}

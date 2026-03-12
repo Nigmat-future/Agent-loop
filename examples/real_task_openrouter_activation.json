@@ -1,0 +1,46 @@
+{
+  "task_type": "general",
+  "objective": "Use the preferred workflow to generate an LLM-powered activation note for this project.",
+  "context": {
+    "action_plan": [
+      {
+        "name": "file.write",
+        "params": {
+          "path": "reports/openrouter_activation_note.md",
+          "content": "# OpenRouter Activation Note\n\nThe framework is configured to use the OpenRouter OpenAI-compatible endpoint with model openai/gpt-4.1-mini.\n\nNext step: replace heuristic planning tasks with model-planned tasks and inspect the produced traces.\n"
+        },
+        "rationale": "Write a concrete activation note inside the workspace."
+      },
+      {
+        "name": "finish",
+        "params": {
+          "message": "openrouter activation note created"
+        },
+        "rationale": "Finish after writing the report."
+      }
+    ]
+  },
+  "success_checks": [
+    {
+      "kind": "file_exists",
+      "target": "reports/openrouter_activation_note.md"
+    },
+    {
+      "kind": "file_contains",
+      "target": "reports/openrouter_activation_note.md",
+      "expected": "# OpenRouter Activation Note"
+    },
+    {
+      "kind": "final_output_contains",
+      "expected": "openrouter activation note created"
+    }
+  ],
+  "permissions": {
+    "workspace_root": ".",
+    "enable_file": true,
+    "enable_shell": true,
+    "enable_http": false,
+    "allowed_shell_prefixes": ["python", "echo"],
+    "allowed_http_domains": []
+  }
+}

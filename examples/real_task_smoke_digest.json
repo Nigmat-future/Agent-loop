@@ -1,0 +1,34 @@
+{
+  "task_type": "general",
+  "objective": "Read reports/smoke_report.md and write reports/smoke_digest.md with a short operational digest.",
+  "context": {
+    "source_files": ["reports/smoke_report.md"],
+    "deliverable_path": "reports/smoke_digest.md",
+    "instructions": [
+      "Read the smoke report before writing.",
+      "The digest must contain the headings '# Smoke Digest', '## Status', and '## Next Step'.",
+      "State whether the smoke test passed."
+    ]
+  },
+  "success_checks": [
+    {"kind": "file_exists", "target": "reports/smoke_digest.md"},
+    {"kind": "file_contains", "target": "reports/smoke_digest.md", "expected": "# Smoke Digest"},
+    {"kind": "file_contains", "target": "reports/smoke_digest.md", "expected": "## Status"},
+    {"kind": "file_contains", "target": "reports/smoke_digest.md", "expected": "PASS"}
+  ],
+  "budget": {
+    "max_steps": 5,
+    "max_shell_calls": 0,
+    "max_http_calls": 0,
+    "timeout_seconds": 30,
+    "max_errors": 3
+  },
+  "permissions": {
+    "workspace_root": ".",
+    "enable_file": true,
+    "enable_shell": false,
+    "enable_http": false,
+    "allowed_shell_prefixes": ["python", "echo"],
+    "allowed_http_domains": []
+  }
+}
