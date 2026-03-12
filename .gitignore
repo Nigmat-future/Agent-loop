@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.env.*
+!.env.openrouter.example
+.agent_loop/
+.pytest_cache/
+.benchmarks/
+*.egg-info/
+dist/
+build/
