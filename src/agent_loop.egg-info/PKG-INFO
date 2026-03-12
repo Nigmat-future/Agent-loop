@@ -1,0 +1,39 @@
+Metadata-Version: 2.4
+Name: agent-loop
+Version: 0.1.0
+Summary: A self-learning agent framework with runtime tracing, evaluation, memory, and strategy promotion.
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi>=0.115.0
+Requires-Dist: pydantic>=2.9.0
+Requires-Dist: typer>=0.12.5
+Requires-Dist: uvicorn>=0.30.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.3.0; extra == "dev"
+
+# Agent Loop
+
+一个本地单机的 Agent 自学习框架，提供：
+
+- `FastAPI` API
+- `Typer` CLI
+- `SQLite + FTS5` 持久化
+- 任务运行时 trace
+- 自动评估、经验提炼、策略候选生成
+- 影子评估后晋升与版本化回滚
+
+## 快速开始
+
+```bash
+python -m pip install -e .[dev]
+agent-loop run-task examples/file_task.json
+agent-loop list-strategies
+```
+
+启动 API：
+
+```bash
+uvicorn agent_loop.api:app --reload
+```
+
+默认会在工作目录下创建 `.agent_loop/agent_loop.db`。
